@@ -12,6 +12,8 @@ def create_database():
     conn = psycopg2.connect(f"host=127.0.0.1 dbname=udacity user={user} password={password}")
     conn.set_session(autocommit=True)
     cur = conn.cursor()
+    
+    # kill existing database
     kill_db(cur,'sparkifydb')
     
     # create sparkify database with UTF8 encoding
@@ -79,7 +81,6 @@ def main():
     
 #     drop_tables(cur, conn)
     create_tables(cur, conn)
-
     conn.close()
 
 

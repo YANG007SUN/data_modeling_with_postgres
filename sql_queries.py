@@ -29,15 +29,15 @@ CREATE TABLE IF NOT EXISTS users (user_id INT,\
 """)
 
 song_table_create = ("""
-CREATE TABLE IF NOT EXISTS songs (song_id INT,\
+CREATE TABLE IF NOT EXISTS songs (song_id VARCHAR,\
                                  title VARCHAR,\
-                                 artist_id INT,\
+                                 artist_id VARCHAR,\
                                  year INT,\
                                  duration FLOAT);
 """)
 
 artist_table_create = ("""
-CREATE TABLE IF NOT EXISTS artist (artist_id INT,\
+CREATE TABLE IF NOT EXISTS artist (artist_id VARCHAR,\
                                  name VARCHAR,\
                                  location VARCHAR,\
                                  latitude FLOAT,\
@@ -63,9 +63,13 @@ user_table_insert = ("""
 """)
 
 song_table_insert = ("""
+INSERT INTO songs (song_id,title,artist_id,year,duration) \
+VALUES (%s, %s, %s, %s, %s)
 """)
 
 artist_table_insert = ("""
+INSERT INTO artist (artist_id,name,location,latitude,longitude) \
+VALUES (%s, %s, %s, %s, %s)
 """)
 
 

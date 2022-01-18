@@ -1,17 +1,18 @@
 import psycopg2
 from sql_queries import create_table_queries, drop_table_queries
-
+from config import user, password
 
 def create_database():
     """
     - Creates and connects to the sparkifydb
     - Returns the connection and cursor to sparkifydb
     """
-    
+
     # connect to default database
-    conn = psycopg2.connect("host=127.0.0.1 dbname=studentdb user=student password=student")
+    conn = psycopg2.connect(f"host=127.0.0.1 dbname=udacity user={user} password={password}")
     conn.set_session(autocommit=True)
     cur = conn.cursor()
+    kill_db(cur,'sparkifydb')
     
     # create sparkify database with UTF8 encoding
     cur.execute("DROP DATABASE IF EXISTS sparkifydb")
@@ -21,7 +22,7 @@ def create_database():
     conn.close()    
     
     # connect to sparkify database
-    conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
+    conn = psycopg2.connect(f"host=127.0.0.1 dbname=sparkifydb user={user} password={password}")
     cur = conn.cursor()
     
     return cur, conn
@@ -44,6 +45,21 @@ def create_tables(cur, conn):
         cur.execute(query)
         conn.commit()
 
+def kill_db(cur,db_name):
+    """
+    kills the connection to existing database and drop the database in order
+    to create a new db
+    """
+    cur.execute(f"""
+    
+    SELECT 
+    pg_terminate_backend(pid) 
+    FROM 
+        pg_stat_activity 
+    WHERE 
+        pid <> pg_backend_pid()
+        AND datname = '{db_name}';
+    """)
 
 def main():
     """
@@ -58,9 +74,10 @@ def main():
     
     - Finally, closes the connection. 
     """
+    
     cur, conn = create_database()
     
-    drop_tables(cur, conn)
+#     drop_tables(cur, conn)
     create_tables(cur, conn)
 
     conn.close()

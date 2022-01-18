@@ -13,7 +13,7 @@ Using python to create an ETL pipelines on multiple `json` files. The ETL pipeli
 2. `etl.ipynb` reads and processes a single file from song_data and log_data and loads the data into the tables. This notebook contains detailed instructions on the ETL process for each of the tables.
 3. `etl.py` reads and processes files from song_data and log_data and loads them into tables. You can fill this out based on your work in the ETL notebook.
 4. `sql_queries.py` contains all your sql queries, and is imported into the last three files above.
-
+5. `config.py` contains the `user name` and `password` for your local or clound postgres. Please make sure update the `user` and `password` before running.
 
 
 

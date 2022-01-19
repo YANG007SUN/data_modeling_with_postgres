@@ -4,8 +4,12 @@ from config import user, password
 
 def create_database():
     """
-    - Creates and connects to the sparkifydb
-    - Returns the connection and cursor to sparkifydb
+        Get connection to database and cursor.
+
+        Returns:
+        cur  -- cursor
+        conn -- connection to data base
+        
     """
 
     # connect to default database
@@ -32,7 +36,11 @@ def create_database():
 
 def drop_tables(cur, conn):
     """
-    Drops each table using the queries in `drop_table_queries` list.
+        Drop existing tables in data base.
+
+        Keyword arguments:
+        cur  -- cursor
+        conn -- connection to data base    
     """
     for query in drop_table_queries:
         cur.execute(query)
@@ -41,7 +49,12 @@ def drop_tables(cur, conn):
 
 def create_tables(cur, conn):
     """
-    Creates each table using the queries in `create_table_queries` list. 
+        Create tables in data base.
+
+        Keyword arguments:
+        cur  -- cursor
+        conn -- connection to data base
+        
     """
     for query in create_table_queries:
         cur.execute(query)
@@ -49,8 +62,13 @@ def create_tables(cur, conn):
 
 def kill_db(cur,db_name):
     """
-    kills the connection to existing database and drop the database in order
-    to create a new db
+        kills the connection to existing database and drop the database in order
+        to create a new db.
+        
+        Keyword arguments:
+        cur -- cursor
+        db_name -- database name you want to create
+    
     """
     cur.execute(f"""
     

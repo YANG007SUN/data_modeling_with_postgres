@@ -23,7 +23,7 @@ def process_log_file(cur, filepath):
     df = pd.read_json(filepath, lines=True)
 
     # filter by NextSong action
-    df = df = df.loc[df['page']=='NextSong']
+    df =  df.loc[df['page']=='NextSong']
 
     # convert timestamp column to datetime
     df['ts']=pd.to_datetime(df['ts'],unit='ms')

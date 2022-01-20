@@ -16,4 +16,13 @@ Using python to create an ETL pipelines on multiple `json` files. The ETL pipeli
 5. `config.py` contains the `user name` and `password` for your local or clound postgres. Please make sure update the `user` and `password` before running.
 
 
+## Schema and ETL pipeline
+- Five tables are followed by `star schema`. One `fact table`(songplays) and 4 `dimention tables`(users, songs, artist, time). Run `create_tables.py` file to `CREATE` database and tables. Run `etl.py` file to `INSERT` data from `json` files to the tables you created. 
+- Make sure to update `config.py` files with your own `postgres` `username` and `password`.
+
+
+## Example queries
+###  Total number of unique users in `users` tables. 
+
+`SELECT COUNT(DISTINCT user_id) FROM users;`
 
